@@ -1,45 +1,20 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
-use App\Models\Contato;
-use PhpParser\Node\Expr\AssignOp\Concat;
 
 class ContatosController extends Controller
 {
-    public function index() {
-        $contato = Contato::all();
+    public function index(Request $request) {
 
-        return view('site.contatos', ['contato' => $contato]);
-    }
+        $contato = $request->all();
+        $email = $contato['emailContato'];
+        $tipo = $contato['tipoContato'];
+        $mensagem = $contato['mensagemContato'];
 
-    public function store(Request $request) {
-        $contato = new Contato;
 
-        $contato->nome = $request->nomeContato;;
-        $contato->email = $request->emailContato;
-        $contato->tipo = $request->tipoContato;
-        $contato->mensagem = $request->mensagemContato;
-
-        try {
-            $contato->save();
-
-            return redirect()->action([ContatosController::class, 'index'])
-                                    ->with('msg','Mensagem enviada com sucesso!');
-        } catch (\Exception $e) {
-            return redirect()->action([ContatosController::class, 'index'])
-                                    ->with('msg','Falha no envio da mensagem!');
-        }
-
+        return view('site.contatos', 
+        ['email'=>$email, 'tipo'=>$tipo, 'mensagem'=>$mensagem]);       
     }
 }
-
-
-
-
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
