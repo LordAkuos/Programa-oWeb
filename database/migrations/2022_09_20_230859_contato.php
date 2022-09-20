@@ -13,7 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('contatos', function (Blueprint $table) {
+            $table->id();
+            $table->string('email', 100);
+            $table->string('tipo', 50);
+            $table->text('mensagem');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('contatos');
     }
 };
