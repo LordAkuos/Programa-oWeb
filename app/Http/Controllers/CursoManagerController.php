@@ -16,7 +16,8 @@ class CursoManagerController extends Controller
     {
         $cursos = Curso::latest()->paginate(5);
 
-        return view('cursosmanager.index', compact('cursos'))->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('cursosmanager.index',compact('cursos'))
+                    ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -37,7 +38,15 @@ class CursoManagerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nome' => 'required',
+            'descricao' => 'required',
+            'imagem' => 'required'
+        ]);
+
+        Curso::create($request->all());
+
+        return redirect()->route('cursosmanager.index')->with('success','Curso criado com sucesso!');
     }
 
     /**
@@ -46,9 +55,11 @@ class CursoManagerController extends Controller
      * @param  \App\Models\Curso  $curso
      * @return \Illuminate\Http\Response
      */
-    public function show(Curso $curso)
+    public function show($id)
     {
-        //
+        $curso = Curso::findOrFail($id);
+
+        return view('cursosmanager.show',compact('curso'));
     }
 
     /**
@@ -57,9 +68,11 @@ class CursoManagerController extends Controller
      * @param  \App\Models\Curso  $curso
      * @return \Illuminate\Http\Response
      */
-    public function edit(Curso $curso)
+    public function edit($id)
     {
-        //
+        $curso = Curso::findOrFail($id);
+
+        return view('cursosmanager.edit',compact('curso'));
     }
 
     /**
@@ -69,9 +82,19 @@ class CursoManagerController extends Controller
      * @param  \App\Models\Curso  $curso
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Curso $curso)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nome' => 'required',
+            'descricao' => 'required',
+            'imagem' => 'required'
+        ]);
+
+        $data = $request->all();
+        
+        Curso::findOrFail($id)->update($data);
+
+        return redirect()->route('cursosmanager.index')->with('success','Curso atualizado com sucesso!');
     }
 
     /**
@@ -80,8 +103,10 @@ class CursoManagerController extends Controller
      * @param  \App\Models\Curso  $curso
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Curso $curso)
+    public function destroy($id)
     {
-        //
+        Curso::findOrFail($id)->delete();
+
+        return redirect()->route('cursosmanager.index')->with('success','Curso excluido com sucesso!');
     }
 }
