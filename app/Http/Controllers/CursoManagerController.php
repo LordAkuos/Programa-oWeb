@@ -14,7 +14,9 @@ class CursoManagerController extends Controller
      */
     public function index()
     {
-        //
+        $cursos = Curso::latest()->paginate(5);
+
+        return view('cursosmanager.index', compact('cursos'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -24,7 +26,7 @@ class CursoManagerController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
