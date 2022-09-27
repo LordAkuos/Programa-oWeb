@@ -44,7 +44,19 @@ class CursoManagerController extends Controller
             'imagem' => 'required'
         ]);
 
-        Curso::create($request->all());
+        //Curso::create($request->all());
+        $curso = new Curso;
+        $curso->nome = $request->nome;
+        $curso->descricao = $request->descricao;
+        $curso->imagem = "";
+        $dirImagem = "images/cursos";
+
+        if($request->hasFile('imagem') && $request->file('imagem')->isValid()){
+            $requestImage = $request->imagem;
+            $extension = $requestImage->extension();
+
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime('now')) . 
+        }
 
         return redirect()->route('cursosmanager.index')->with('success','Curso criado com sucesso!');
     }
