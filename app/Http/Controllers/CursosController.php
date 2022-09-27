@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 class CursosController extends Controller
 {
     public function index() {
-        $curso = Curso::all();
+        $cursos = Curso::all();
+
         return view('site.cursos',compact('cursos'));
     }
 }
