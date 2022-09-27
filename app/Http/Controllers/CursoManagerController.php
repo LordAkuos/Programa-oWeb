@@ -61,7 +61,7 @@ class CursoManagerController extends Controller
             $curso->imagem = $dirImagem . $imageName;
         }
 
-        $curso->save;
+        $curso->save();
 
         return redirect()->route('cursosmanager.index')->with('success','Curso criado com sucesso!');
     }
