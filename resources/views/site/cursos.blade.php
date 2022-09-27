@@ -49,7 +49,7 @@
               <img src="{{ asset('images/img-curso-python.jpg') }}" class="figure-img img-fluid rounded" alt="Curso Laravel">
           </figure>
         </div>
-      </div>
+      </div>-->
     <!-- /END THE FEATURETTES -->
 </div>
 
