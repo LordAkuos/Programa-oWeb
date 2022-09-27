@@ -10,8 +10,22 @@
 
 <div class="container">
     <!-- START THE FEATURETTES -->
-
+    @foreach ($cursos as $curso)
     <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">{{ $curso->nome }}</h2>
+          <p class="lead">{{ $curso->descricao }}</p>
+        </div>
+        <div class="col-md-5">
+          <figure class="figure">
+              {{-- <img src="/images/cursos/{{ $curso->imagem }}" class="figure-img img-fluid rounded" alt="{{ $curso->nome }}">--}}
+              <img src="{{ asset($curso->imagem) }}" class="figure-img img-fluid rounded" alt="{{ $curso->nome }}">
+          </figure>
+        </div>
+      </div>
+      <hr class="featurette-divider">
+    @endforeach
+    <!--<div class="row featurette">
       <div class="col-md-7">
         <h2 class="featurette-heading">Curso de Laravel</h2>
         <p class="lead">Curso de Laravel para iniciantes. Aprenda como utilizar o framework Laravel e tornar os seus projetos mais produtivos.</p>
