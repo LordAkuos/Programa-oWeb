@@ -18,7 +18,6 @@
         </div>
         <div class="col-md-5">
           <figure class="figure">
-              {{-- <img src="/images/cursos/{{ $curso->imagem }}" class="figure-img img-fluid rounded" alt="{{ $curso->nome }}">--}}
               <img src="{{ asset($curso->imagem) }}" class="figure-img img-fluid rounded" alt="{{ $curso->nome }}">
           </figure>
         </div>
