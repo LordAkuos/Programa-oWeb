@@ -49,7 +49,7 @@ class CursoManagerController extends Controller
         $curso->nome = $request->nome;
         $curso->descricao = $request->descricao;
         $curso->imagem = "";
-        $dirImagem = "images/cursos";
+        $dirImagem = "images/cursos/";
 
         if($request->hasFile('imagem') && $request->file('imagem')->isValid()){
             $requestImage = $request->imagem;
